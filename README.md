@@ -1,6 +1,32 @@
-# Getting Started with Create React App
+# Weather App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is my first ever React project. Hope you like it!! :D
+
+## TODO:
+
+- form validation for input types
+- fetch time from where lat, lng is fetched from (location of current lat, lng)
+- input fields to be responsive (currently, their size is always the same, make it as 5% or something...)
+- remove app.css, and use the same const css, as used in other files
+- error to be shown, whatever is fetched from api
+- global variable usage and set using hooks
+- httpService.js - file where we keep api calls
+- use button as component, pass function and text
+- use caching (if possible for previously entered lat, lng)
+
+## DONE:
+
+- Custom Components made for reusability.
+- Hooks for data fetching etc.
+- GET API call done.
+- List traversed with component.
+- Responsiveness (upto a limit)
+- Icons components used
+- Date Time Fetcher
+- Geolocation used for autofill
+- Scrollable feature used
+
+<!-- edit according to you project... the features, about, how, why, when, etc. -->
 
 ## Available Scripts
 
