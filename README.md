@@ -4,7 +4,6 @@ This is my first ever React project. Hope you like it!! :D
 
 ## TODO:
 
-- fetch time from where lat, lng is fetched from (location of current lat, lng)
 - input fields to be responsive (currently, their size is always the same, make it as 5% or something...)
 - error to be shown, whatever is fetched from api
 - global variable usage and set using hooks
@@ -23,6 +22,7 @@ This is my first ever React project. Hope you like it!! :D
 - Geolocation used for autofill
 - Scrollable feature used
 - form validation for input types
+- fetch time from where lat, lng is fetched from (location of current lat, lng)
 
 <!-- edit according to you project... the features, about, how, why, when, etc. -->
 

@@ -10,6 +10,9 @@ const WeatherFinder = () => {
     const [longitude, setLongitude] = useState('77.10');
     const [weatherData, setWeatherData ] = useState('');
     const [error, setError] = useState('');
+    const currDateTime = new Date();
+    const showTime = currDateTime.getHours().toString().padStart(2, '0') + ':' + currDateTime.getMinutes().toString().padStart(2, '0');
+    const [timeStamp, setTimeStamp] = useState(showTime);
 
     const {coords, isGeolocationAvailable, isGeolocationEnabled} =
         useGeolocated({
@@ -35,6 +38,9 @@ const WeatherFinder = () => {
 
         try {
             const data = await HttpService.getWeatherData(latitude, longitude);
+            const timeZone = await HttpService.getTimeZone(latitude, longitude);
+
+            setTimeStamp(timeZone.currentLocalTime.split("T")[1].slice(0, 5));
             setWeatherData({
                 current: {
                     temperature: data.current.temperature_2m,
@@ -126,7 +132,8 @@ const WeatherFinder = () => {
             {weatherData && 
                 <WeatherCard 
                     weatherData={weatherData} 
-                    hourlyCheck={hourlyCheck} 
+                    hourlyCheck={hourlyCheck}
+                    showTime={timeStamp}
                 />
             }
         </div>

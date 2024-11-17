@@ -2,12 +2,10 @@ import React, { useState, useRef } from 'react';
 import HourlyCard from './HourlyCard';
 import { DoubleRightOutlined, DoubleLeftOutlined } from '@ant-design/icons';
 
-const WeatherCard = ({ weatherData, hourlyCheck }) => {
+const WeatherCard = ({ weatherData, hourlyCheck, showTime }) => {
     const date = useState(weatherData.current.time.split("T")[0]);
     const navRef = useRef();
     const scrollAmount = 500;
-    const currDateTime = new Date();
-    const showTime = currDateTime.getHours().toString().padStart(2, '0') + ':' + currDateTime.getMinutes().toString().padStart(2, '0');
 
     const handleNav = (direction) => {
         if (direction === 'left') {
