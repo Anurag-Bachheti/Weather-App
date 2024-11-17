@@ -6,8 +6,8 @@ import { useGeolocated } from "react-geolocated";
 
 const WeatherFinder = () => {
     const [hourlyCheck, setHourlyCheck] = useState(false);
-    const [latitude, setLatitude] = useState('0');
-    const [longitude, setLongitude] = useState('0');
+    const [latitude, setLatitude] = useState('28.70');
+    const [longitude, setLongitude] = useState('77.10');
     const [weatherData, setWeatherData ] = useState('');
     const [error, setError] = useState('');
 
@@ -24,7 +24,14 @@ const WeatherFinder = () => {
             setError('Please enter both Latitude and Longitude');
             return;
         }
-
+        if (!(latitude >= -180 && latitude <= 180)) {
+            setError('Please enter a valid Latitude');
+            return;
+        }
+        if (!(longitude >= -180 && longitude <= 180)) {
+            setError('Please enter a valid Longitude');
+            return;
+        }
         try {
             const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m'
             
@@ -92,6 +99,7 @@ const WeatherFinder = () => {
 
                     <div><strong> LATITUDE: </strong>
                         <input
+                            type='number'
                             name='lat'
                             value={latitude}
                             onChange={(e) => setLatitude(e.target.value)}
@@ -113,12 +121,13 @@ const WeatherFinder = () => {
                         }}
                         label="Hourly Updates"
                     />
+
+                    {error && <p style ={{color:'red'}}>{error}</p>}
+
                     <br/>
                     <button style={btn} onClick = {handleSubmit}> Submit</button>
                 </div>
             </div>
-
-            {error && <p style ={{color:'red'}}>{error}</p>}
 
             {weatherData && 
                 <WeatherCard 
@@ -133,11 +142,11 @@ const WeatherFinder = () => {
 const cardstyle = {
     border: '1px solid #ddd',
     borderRadius: '8px',
-    padding: '1%',
+    padding: '3%',
     margin: '3% auto',
-    width: '30%',
+    width: '25%',
     textAlign: 'center',
-    backgroundColor: '#dc962c',
+    backgroundColor: '#C0C0C0',
     color: 'black',
 };
 
