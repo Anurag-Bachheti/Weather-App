@@ -4,7 +4,6 @@ This is my first ever React project. Hope you like it!! :D
 
 ## TODO:
 
-- form validation for input types
 - fetch time from where lat, lng is fetched from (location of current lat, lng)
 - input fields to be responsive (currently, their size is always the same, make it as 5% or something...)
 - remove app.css, and use the same const css, as used in other files
@@ -25,6 +24,7 @@ This is my first ever React project. Hope you like it!! :D
 - Date Time Fetcher
 - Geolocation used for autofill
 - Scrollable feature used
+- form validation for input types
 
 <!-- edit according to you project... the features, about, how, why, when, etc. -->
 

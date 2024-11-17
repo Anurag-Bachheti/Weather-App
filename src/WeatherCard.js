@@ -1,4 +1,3 @@
-import './App.css';
 import React, { useState, useRef } from 'react';
 import HourlyCard from './HourlyCard';
 import { DoubleRightOutlined, DoubleLeftOutlined } from '@ant-design/icons';

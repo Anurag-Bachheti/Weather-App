@@ -1,4 +1,3 @@
-import './App.css';
 import React, { useState } from 'react';
 import WeatherCard from './WeatherCard';
 import Checkbox from "react-custom-checkbox";
@@ -24,7 +23,7 @@ const WeatherFinder = () => {
             setError('Please enter both Latitude and Longitude');
             return;
         }
-        if (!(latitude >= -180 && latitude <= 180)) {
+        if (!(latitude >= -90 && latitude <= 90)) {
             setError('Please enter a valid Latitude');
             return;
         }
@@ -65,7 +64,7 @@ const WeatherFinder = () => {
                         }
 
                     });
-                });
+                    });
     
             setError('');
         } catch (error) {
@@ -140,8 +139,8 @@ const WeatherFinder = () => {
 }
 
 const cardstyle = {
-    border: '1px solid #ddd',
-    borderRadius: '8px',
+    border: '1% solid #ddd',
+    borderRadius: '8%',
     padding: '3%',
     margin: '3% auto',
     width: '25%',
