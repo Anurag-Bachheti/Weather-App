@@ -59,9 +59,7 @@ const WeatherCard = ({ weatherData, hourlyCheck }) => {
 const cardstyle = {
     border: '1px solid #ddd',
     borderRadius: '8px',
-    // padding: '5px',
     margin: '8px',
-    // width: '50%',
     textAlign: 'center',
     backgroundColor: '#7CB9E8',
 };

@@ -1,11 +1,11 @@
-import Header from './Header.js';
-import Weather from './WeatherFinder.js';
-import Footer from './Footer.js';
+import Header from './screens/Header.js';
+import Weather from './screens/WeatherFinder.js';
+import Footer from './screens/Footer.js';
 
 function App() {
   return (
     <div className="App">
-      { <Header/> }
+      <Header/>
       <Weather/>
       <Footer/>
     </div>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import WeatherCard from './WeatherCard';
 import Checkbox from "react-custom-checkbox";
 import { useGeolocated } from "react-geolocated";
+import HttpService from '../scripts/HttpService';
+import WeatherCard from './WeatherCard';
 
 const WeatherFinder = () => {
     const [hourlyCheck, setHourlyCheck] = useState(false);
@@ -31,41 +32,35 @@ const WeatherFinder = () => {
             setError('Please enter a valid Longitude');
             return;
         }
-        try {
-            const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m'
-            
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then((data) => {
-                    setWeatherData({
-                        current: {
-                            temperature: data.current.temperature_2m,
-                            windSpeed: data.current.wind_speed_10m,
-                            time: data.current.time
-                        },
-                        hourly: {
-                            time: data.hourly.time,
-                            temperature: data.hourly.temperature_2m,
-                            humidity: data.hourly.relative_humidity_2m,
-                            windSpeed: data.hourly.wind_speed_10m
-                        },
-                        unit: {
-                            current: {
-                                time:data.current_units.time,
-                                temperature:data.current_units.temperature_2m,
-                                windSpeed:data.current_units.wind_speed_10m
-                            },
-                            hourly: {
-                                time:data.hourly_units.time,
-                                temperature:data.hourly_units.temperature_2m,
-                                windSpeed:data.hourly_units.wind_speed_10m,
-                                humidity:data.hourly_units.relative_humidity_2m
-                            }
-                        }
 
-                    });
-                    });
-    
+        try {
+            const data = await HttpService.getWeatherData(latitude, longitude);
+            setWeatherData({
+                current: {
+                    temperature: data.current.temperature_2m,
+                    windSpeed: data.current.wind_speed_10m,
+                    time: data.current.time
+                },
+                hourly: {
+                    time: data.hourly.time,
+                    temperature: data.hourly.temperature_2m,
+                    humidity: data.hourly.relative_humidity_2m,
+                    windSpeed: data.hourly.wind_speed_10m
+                },
+                unit: {
+                    current: {
+                        time: data.current_units.time,
+                        temperature: data.current_units.temperature_2m,
+                        windSpeed: data.current_units.wind_speed_10m
+                    },
+                    hourly: {
+                        time: data.hourly_units.time,
+                        temperature: data.hourly_units.temperature_2m,
+                        windSpeed: data.hourly_units.wind_speed_10m,
+                        humidity: data.hourly_units.relative_humidity_2m
+                    }
+                }
+            });
             setError('');
         } catch (error) {
             setError(error.message);
@@ -155,6 +150,6 @@ const btn = {
     backgroundColor:'black',
     fontSize:'100%',
     padding:'1%'
-}
+};
 
 export default WeatherFinder;
