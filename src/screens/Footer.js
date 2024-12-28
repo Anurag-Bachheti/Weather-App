@@ -2,7 +2,7 @@ function Footer() {
     return (
         <div style = {newfooter}>
             <footer>
-                Contact Information
+                Notice - Planning for a trip!! Do check before your trip begins.
             </footer>
         </div>
     );

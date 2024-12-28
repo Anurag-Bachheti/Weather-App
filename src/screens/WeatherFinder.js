@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
-import Checkbox from "react-custom-checkbox";
 import { useGeolocated } from "react-geolocated";
-import HttpService from '../scripts/HttpService';
+import HttpService from '../scripts/HttpService';   
 import WeatherCard from './WeatherCard';
 
 const WeatherFinder = () => {
     const [hourlyCheck, setHourlyCheck] = useState(false);
     const [latitude, setLatitude] = useState('28.70');
     const [longitude, setLongitude] = useState('77.10');
-    const [weatherData, setWeatherData ] = useState('');
+    const [weatherData, setWeatherData] = useState('');
     const [error, setError] = useState('');
     const currDateTime = new Date();
     const showTime = currDateTime.getHours().toString().padStart(2, '0') + ':' + currDateTime.getMinutes().toString().padStart(2, '0');
     const [timeStamp, setTimeStamp] = useState(showTime);
 
-    const {coords, isGeolocationAvailable, isGeolocationEnabled} =
+    const { coords, isGeolocationAvailable, isGeolocationEnabled } =
         useGeolocated({
             positionOptions: {
                 enableHighAccuracy: false,
             },
-        userDecisionTimeout:5000,
-    });
+            userDecisionTimeout: 5000,
+        });
 
     const handleSubmit = async () => {
         if (!latitude || !longitude) {
@@ -79,10 +78,13 @@ const WeatherFinder = () => {
             setLongitude(coords.longitude);
         }
     };
-    
-    return(
+    const handleHourlyToggle = () => {
+        setHourlyCheck((prev) => !prev);
+    };
+
+    return (
         <div>
-            <div style={{justifyContent: 'center'}}>
+            <div style={{ justifyContent: 'center' }}>
                 <div style={cardstyle}>
                     <h1> Weather Finder</h1>
                     {!isGeolocationAvailable && (
@@ -103,35 +105,35 @@ const WeatherFinder = () => {
                             name='lat'
                             value={latitude}
                             onChange={(e) => setLatitude(e.target.value)}
-                            /> 
+                        />
                     </div>
-                    <br/>
-                    <div style={{fontSize:'100%', fontweight:'bold'}}>
+                    <br />
+                    <div style={{ fontSize: '100%', fontweight: 'bold' }}>
                         <strong>LONGITUDE: </strong>
                         <input name='lng'
                             value={longitude}
                             onChange={(e) => setLongitude(e.target.value)}
-                            />
+                        />
                     </div>
-                    <br/>
-                    <Checkbox style={{color: 'red', backgroundColor:'black'}}
-                        name="hourly"
-                        onChange={(value) => {
-                            setHourlyCheck(value);
-                        }}
-                        label="Hourly Updates"
-                    />
+                    <br />
 
-                    {error && <p style ={{color:'red'}}>{error}</p>}
+                    <button
+                        style={{ ...btn, backgroundColor: hourlyCheck ? "green" : "red" }}
+                        onClick={handleHourlyToggle}
+                    >
+                        {hourlyCheck ? "Disable Hourly Updates" : "Enable Hourly Updates"}
+                    </button>
 
-                    <br/>
-                    <button style={btn} onClick = {handleSubmit}> Submit</button>
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
+
+                    <br />
+                    <button style={btn} onClick={handleSubmit}> Submit</button>
                 </div>
             </div>
 
-            {weatherData && 
-                <WeatherCard 
-                    weatherData={weatherData} 
+            {weatherData &&
+                <WeatherCard
+                    weatherData={weatherData}
                     hourlyCheck={hourlyCheck}
                     showTime={timeStamp}
                 />
@@ -152,11 +154,11 @@ const cardstyle = {
 };
 
 const btn = {
-    cursor:'pointer',
-    color:'white',
-    backgroundColor:'black',
-    fontSize:'100%',
-    padding:'1%'
+    cursor: 'pointer',
+    color: 'white',
+    backgroundColor: 'black',
+    fontSize: '100%',
+    padding: '1%'
 };
 
 export default WeatherFinder;

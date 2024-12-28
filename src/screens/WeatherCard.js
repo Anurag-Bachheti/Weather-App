@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import HourlyCard from './HourlyCard';
 import { DoubleRightOutlined, DoubleLeftOutlined } from '@ant-design/icons';
+import WeatherIcon from './WeatherIcon';
 
 const WeatherCard = ({ weatherData, hourlyCheck, showTime }) => {
     const date = useState(weatherData.current.time.split("T")[0]);
@@ -24,30 +25,32 @@ const WeatherCard = ({ weatherData, hourlyCheck, showTime }) => {
             <div style={cardstyle}>
                 <h2>Current Weather</h2>
                 <p><strong>Date:</strong> {date}</p>
-                <p><strong>Temperature:</strong> { weatherData.current?.temperature ||"N/A" }
+                <p><strong>Temperature:</strong> {weatherData.current?.temperature || "N/A"}
                     {weatherData.unit.current?.temperature || ""}</p>
                 <p><strong>Wind Speed:</strong> {weatherData.current?.windSpeed || "N/A"}
                     {weatherData.unit.current?.windSpeed || ""} </p>
                 <p><strong>Time:</strong> {weatherData.current?.time ? showTime : "Unavailable"}
                     {weatherData.unit.current?.time.split("T")[1] || ""}
                 </p>
+                <WeatherIcon temperature={weatherData.current.temperature} />
             </div>
-            
-            {hourlyCheck && 
-                <div style={{...containerStyle}}>
-                    <DoubleLeftOutlined onClick={() => handleNav('left')} style={buttonStyle}/>
-                    <div style= {scrollStyle} ref={navRef}>
-                        {Array.from({length: 24}).map((_, index) => (
+
+            {hourlyCheck &&
+                <div style={{ ...containerStyle }}>
+                    <DoubleLeftOutlined onClick={() => handleNav('left')} style={buttonStyle} />
+                    <div style={scrollStyle} ref={navRef}>
+                        {Array.from({ length: 24 }).map((_, index) => (
                             <HourlyCard
-                                key = {index}
-                                dateTime={weatherData.hourly.time[index]}          
-                                temperature={`${weatherData.hourly.temperature[index]} ${weatherData.unit.hourly?.temperature || ""}`} 
-                                humidity={`${weatherData.hourly.humidity[index]} ${weatherData.unit.hourly?.humidity || ""}`}    
-                                windSpeed={`${weatherData.hourly.windSpeed[index]} ${weatherData.unit.hourly?.windSpeed || ""}`}    
+                                key={index}
+                                dateTime={weatherData.hourly.time[index]}
+                                temperature={`${weatherData.hourly.temperature[index]} ${weatherData.unit.hourly?.temperature || ""}`}
+                                humidity={`${weatherData.hourly.humidity[index]} ${weatherData.unit.hourly?.humidity || ""}`}
+                                windSpeed={`${weatherData.hourly.windSpeed[index]} ${weatherData.unit.hourly?.windSpeed || ""}`}
                             />
                         ))}
                     </div>
-                    <DoubleRightOutlined onClick={() => handleNav('right')} style={buttonStyle}/>
+                    <DoubleRightOutlined onClick={() => handleNav('right')} style={buttonStyle} />
+
                 </div>
             }
         </div>
