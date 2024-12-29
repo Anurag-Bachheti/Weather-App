@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import WeatherIcon from './WeatherIcon'
+// import WeatherIcon from './WeatherIcon'
 
 const HourlyCard = ({dateTime, temperature, humidity, windSpeed}) => {
     const time = useState(dateTime.split("T")[1]);
@@ -10,7 +10,7 @@ const HourlyCard = ({dateTime, temperature, humidity, windSpeed}) => {
             <p><b>Temperture</b>: {temperature}</p>    
             <p><b>Humidity</b>: {humidity}</p>    
             <p><b>Windspeed</b>: {windSpeed}</p>
-            <WeatherIcon temperature={temperature} />
+            {/* <WeatherIcon temperature={temperature} /> */}
         </div>
     );
 }

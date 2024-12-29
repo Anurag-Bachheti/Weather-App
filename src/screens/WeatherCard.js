@@ -3,11 +3,12 @@ import HourlyCard from './HourlyCard';
 import { DoubleRightOutlined, DoubleLeftOutlined } from '@ant-design/icons';
 import WeatherIcon from './WeatherIcon';
 
+
 const WeatherCard = ({ weatherData, hourlyCheck, showTime }) => {
     const date = useState(weatherData.current.time.split("T")[0]);
     const navRef = useRef();
     const scrollAmount = 500;
-
+    
     const handleNav = (direction) => {
         if (direction === 'left') {
             if (navRef) {
@@ -30,9 +31,15 @@ const WeatherCard = ({ weatherData, hourlyCheck, showTime }) => {
                 <p><strong>Wind Speed:</strong> {weatherData.current?.windSpeed || "N/A"}
                     {weatherData.unit.current?.windSpeed || ""} </p>
                 <p><strong>Time:</strong> {weatherData.current?.time ? showTime : "Unavailable"}
-                    {weatherData.unit.current?.time.split("T")[1] || ""}
-                </p>
-                <WeatherIcon temperature={weatherData.current.temperature} />
+                    {weatherData.unit.current?.time.split("T")[1] || ""}</p>
+                {/* <p><strong>Humidity:</strong> {weatherData?.current?.humidity !== undefined ?
+                    `${weatherData.current.humidity}${weatherData?.unit?.current?.humidity || ""}` : "N/A"}</p> */}
+
+
+                <WeatherIcon
+                    temperature={weatherData?.current?.temperature} 
+                    // humidity={weatherData?.current?.humidity}
+                    />
             </div>
 
             {hourlyCheck &&
@@ -50,7 +57,6 @@ const WeatherCard = ({ weatherData, hourlyCheck, showTime }) => {
                         ))}
                     </div>
                     <DoubleRightOutlined onClick={() => handleNav('right')} style={buttonStyle} />
-
                 </div>
             }
         </div>

@@ -34,7 +34,7 @@ const WeatherFinder = () => {
             setError('Please enter a valid Longitude');
             return;
         }
-
+        
         try {
             const data = await HttpService.getWeatherData(latitude, longitude);
             const timeZone = await HttpService.getTimeZone(latitude, longitude);
@@ -44,7 +44,8 @@ const WeatherFinder = () => {
                 current: {
                     temperature: data.current.temperature_2m,
                     windSpeed: data.current.wind_speed_10m,
-                    time: data.current.time
+                    time: data.current.time,
+                    humidity:  data.current.relative_humidity_2m
                 },
                 hourly: {
                     time: data.hourly.time,
@@ -56,7 +57,8 @@ const WeatherFinder = () => {
                     current: {
                         time: data.current_units.time,
                         temperature: data.current_units.temperature_2m,
-                        windSpeed: data.current_units.wind_speed_10m
+                        windSpeed: data.current_units.wind_speed_10m,
+                        humidity: data.current_units.relative_humidity_2m
                     },
                     hourly: {
                         time: data.hourly_units.time,
